@@ -2,6 +2,8 @@
 
 TexTra API Client for Deno.
 
+https://mt-auto-minhon-mlt.ucri.jgn-x.jp/content/api/
+
 ## Usage
 
 ```ts

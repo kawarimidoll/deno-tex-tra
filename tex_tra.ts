@@ -122,7 +122,6 @@ export class TexTra {
   private key: string;
   private secret: string;
   private token = "";
-  private decoder = new TextDecoder();
 
   /**
    * Create TexTra API Client
@@ -186,18 +185,9 @@ export class TexTra {
     body.append("urlAccessToken", AUTH_URL);
 
     const response = await fetch(AUTH_URL, { method: "POST", body });
-    if (!response?.body) {
-      throw new Error("OAuth2 Error. API response data is empty.");
-    }
-
-    const responseBody = await response.body.getReader().read();
-    if (!responseBody) {
-      throw new Error("OAuth2 Error. API response data is empty.");
-    }
-
-    const value = JSON.parse(this.decoder.decode(responseBody.value));
-    this.token = value.access_token;
-    this.expire = Date.now() + value.expires_in;
+    const { access_token, expires_in } = await response.json();
+    this.token = access_token;
+    this.expire = Date.now() + expires_in;
   }
 
   private async request(
@@ -215,15 +205,6 @@ export class TexTra {
     body.append("text", text);
 
     const response = await fetch(API_URL, { method: "POST", body });
-    if (!response.body) {
-      throw new Error("Translate Error. API response data is empty.");
-    }
-
-    const responseBody = await response.body.getReader().read();
-    if (!responseBody) {
-      throw new Error("Translate Error. API response data is empty.");
-    }
-
-    return JSON.parse(this.decoder.decode(responseBody.value)).resultset;
+    return (await response.json()).resultset;
   }
 }

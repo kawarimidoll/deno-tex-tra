@@ -48,6 +48,67 @@ function translate(text: string, from: string, to: string) {
 }
 ```
 
+## API coverage
+
+This is not a TODO list, just an indication of the current state of support.
+This project is not intended to support all APIs.
+
+- [x] mt/lang_id
+- [ ] mt_standard/get
+- [ ] mt_adapt/set
+- [ ] mt_adapt/update
+- [ ] mt_adapt/get
+- [ ] mt_adapt/delete
+- [ ] mt_custom/set
+- [ ] mt_custom/update
+- [ ] mt_custom/get
+- [ ] mt_custom/delete
+- [ ] mt_share/get
+- [ ] term_root/set
+- [ ] term_root/update
+- [ ] term_root/get
+- [ ] term_root/delete
+- [ ] term/set
+- [ ] term/set_file
+- [ ] term/update
+- [ ] term/get
+- [ ] term/delete
+- [ ] bilingual_root/set
+- [ ] bilingual_root/update
+- [ ] bilingual_root/get
+- [ ] bilingual_root/delete
+- [ ] bilingual/set
+- [ ] bilingual/set_file
+- [ ] bilingual/update
+- [ ] bilingual/get
+- [ ] bilingual/delete
+- [ ] regex_root/set
+- [ ] regex_root/update
+- [ ] regex_root/get
+- [ ] regex_root/delete
+- [ ] regex/set
+- [ ] regex/set_file
+- [ ] regex/update
+- [ ] regex/get
+- [ ] regex/delete
+- [ ] lookup
+- [ ] sim
+- [ ] simCalc
+- [ ] split
+- [x] langdetect
+- [ ] trans_file/set
+- [ ] trans_file/status
+- [ ] trans_file/get
+- [ ] exterm/set
+- [ ] exterm/status
+- [ ] exterm/get
+- [ ] alignment/set
+- [ ] alignment/status
+- [ ] alignment/get
+- [ ] doc/set
+- [ ] doc/list
+- [ ] doc/get
+
 ## Author
 
 [kawarimidoll](https://github.com/kawarimidoll)

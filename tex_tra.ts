@@ -76,6 +76,13 @@ export type TranslateResponse = {
   };
 };
 
+export type LangDetectResponse = {
+  code: number;
+  message: string;
+  request?: { url: string; text: string };
+  result?: { langdetect: { [k: string]: { lang: string; rate: number } } };
+};
+
 const BASE_URL = "https://mt-auto-minhon-mlt.ucri.jgn-x.jp";
 const AUTH_URL = `${BASE_URL}/oauth2/token.php`;
 const API_URL = `${BASE_URL}/api/`;
@@ -163,6 +170,18 @@ export class TexTra {
       await this.auth();
     }
     return this.request(text, apiName, apiParam);
+  }
+
+  /**
+   * Detect language
+   * @param text - Text to detect language
+   * @returns Language detection API result
+   */
+  async langDetect(text: string) {
+    if (!this.token || this.expire < Date.now()) {
+      await this.auth();
+    }
+    return this.request(text, "langdetect");
   }
 
   private async auth() {

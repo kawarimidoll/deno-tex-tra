@@ -1,23 +1,5 @@
-export type TexTraResponse = {
-  code:
-    | 0
-    | 500
-    | 501
-    | 502
-    | 504
-    | 505
-    | 510
-    | 511
-    | 520
-    | 521
-    | 522
-    | 523
-    | 524
-    | 525
-    | 530
-    | 531
-    | 532
-    | 533;
+export type TranslateResponse = {
+  code: number;
   message: string;
   request?: {
     url: string;
@@ -31,67 +13,66 @@ export type TexTraResponse = {
     editor_use: number;
     data: unknown;
   };
-  result?: Result;
-};
-type Result = {
-  text: string;
-  blank: 0 | 1;
-  information?: {
-    "text-s": string;
-    "text-t": string;
-    sentence: {
+  result?: {
+    text: string;
+    blank: 0 | 1;
+    information?: {
       "text-s": string;
       "text-t": string;
-      split: {
+      sentence: {
         "text-s": string;
         "text-t": string;
-        process: {
-          regex: {
-            text: string;
-            result: string;
-            pattern: string;
-            replace: string;
-          }[];
-          "replace-before": {
-            "text-s": string;
-            "text-t": string;
-            "term-s": string;
-            "term-t": string;
-          }[];
-          "short-before": unknown;
-          preprocess: unknown;
-          translate: {
-            reverse: {
-              selected: 0 | 1;
-              "id-n": string;
-              "id-r": string;
-              "name-n": string;
-              "name-r": string;
+        split: {
+          "text-s": string;
+          "text-t": string;
+          process: {
+            regex: {
+              text: string;
+              result: string;
+              pattern: string;
+              replace: string;
+            }[];
+            "replace-before": {
               "text-s": string;
               "text-t": string;
-              "text-r": string;
-              score: number;
+              "term-s": string;
+              "term-t": string;
             }[];
-            specification: unknown;
-            "text-s": string;
-            "src-token": unknown;
-            "text-t": string;
-            associate: unknown;
-            oov: unknown;
-            exception: string;
-            associates: unknown;
+            "short-before": unknown;
+            preprocess: unknown;
+            translate: {
+              reverse: {
+                selected: 0 | 1;
+                "id-n": string;
+                "id-r": string;
+                "name-n": string;
+                "name-r": string;
+                "text-s": string;
+                "text-t": string;
+                "text-r": string;
+                score: number;
+              }[];
+              specification: unknown;
+              "text-s": string;
+              "src-token": unknown;
+              "text-t": string;
+              associate: unknown;
+              oov: unknown;
+              exception: string;
+              associates: unknown;
+            };
+            "short-after": unknown;
+            "regex-after": unknown;
+            "replace-after": {
+              "text-s": string;
+              "text-t": string;
+              "term-s": string;
+              "term-t": string;
+            }[];
           };
-          "short-after": unknown;
-          "regex-after": unknown;
-          "replace-after": {
-            "text-s": string;
-            "text-t": string;
-            "term-s": string;
-            "term-t": string;
-          }[];
-        };
+        }[];
       }[];
-    }[];
+    };
   };
 };
 
@@ -173,7 +154,11 @@ export class TexTra {
    *  }
    * ```
    */
-  async translate(text: string, apiName: string, apiParam: string) {
+  async translate(
+    text: string,
+    apiName: string,
+    apiParam: string,
+  ): Promise<TranslateResponse> {
     if (!this.token || this.expire < Date.now()) {
       await this.auth();
     }
@@ -193,16 +178,14 @@ export class TexTra {
     this.expire = Date.now() + expires_in;
   }
 
-  private async request(
-    text: string,
-    apiName: string,
-    apiParam: string,
-  ): Promise<TexTraResponse> {
+  private async request(text: string, apiName: string, apiParam?: string) {
     const body = new FormData();
     body.append("access_token", this.token);
     body.append("key", this.key);
     body.append("api_name", apiName);
-    body.append("api_param", apiParam);
+    if (apiParam) {
+      body.append("api_param", apiParam);
+    }
     body.append("name", this.name);
     body.append("type", "json");
     body.append("text", text);

@@ -166,10 +166,7 @@ export class TexTra {
     apiName: string,
     apiParam: string,
   ): Promise<TranslateResponse> {
-    if (!this.token || this.expire < Date.now()) {
-      await this.auth();
-    }
-    return this.request(text, apiName, apiParam);
+    return await this.request(text, apiName, apiParam);
   }
 
   /**
@@ -178,10 +175,7 @@ export class TexTra {
    * @returns Language detection API result
    */
   async langDetect(text: string) {
-    if (!this.token || this.expire < Date.now()) {
-      await this.auth();
-    }
-    return this.request(text, "langdetect");
+    return await this.request(text, "langdetect");
   }
 
   private async auth() {
@@ -198,6 +192,9 @@ export class TexTra {
   }
 
   private async request(text: string, apiName: string, apiParam?: string) {
+    if (!this.token || this.expire < Date.now()) {
+      await this.auth();
+    }
     const body = new FormData();
     body.append("access_token", this.token);
     body.append("key", this.key);

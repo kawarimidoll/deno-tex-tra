@@ -191,7 +191,12 @@ export class TexTra {
     this.expire = Date.now() + expires_in;
   }
 
-  private async request(text: string, apiName: string, apiParam?: string) {
+  private async request(
+    text: string,
+    apiName: string,
+    apiParam?: string,
+    options: Record<string, string | number> = {},
+  ) {
     if (!this.token || this.expire < Date.now()) {
       await this.auth();
     }
@@ -205,6 +210,9 @@ export class TexTra {
     body.append("name", this.name);
     body.append("type", "json");
     body.append("text", text);
+    for (const [key, value] of Object.entries(options)) {
+      body.append(key, value.toString());
+    }
 
     const response = await fetch(API_URL, { method: "POST", body });
     return (await response.json()).resultset;

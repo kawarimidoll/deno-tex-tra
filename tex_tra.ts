@@ -76,6 +76,20 @@ export type TranslateResponse = {
   };
 };
 
+export type ListResponse = {
+  code: number;
+  message: string;
+  request?: { url: string; limit?: number; offset?: number };
+  result?: {
+    limit?: number;
+    offset?: number;
+    list: {
+      id: number | string;
+      [k: string]: unknown;
+    }[];
+  };
+};
+
 export type LangDetectResponse = {
   code: number;
   message: string;
@@ -167,6 +181,32 @@ export class TexTra {
     apiParam: string,
   ): Promise<TranslateResponse> {
     return await this.request(text, apiName, apiParam);
+  }
+
+  /**
+   * List acquisition
+   * @param apiName - API name like "mt_standard"
+   * @param options - API options
+   * @returns List acquisition API result
+   */
+  async listAcquisition(
+    apiName:
+      | "mt_standard"
+      | "mt_adapt"
+      | "mt_custom"
+      | "mt_share"
+      | "term_root"
+      | "bilingual_root"
+      | "regex_root",
+    options?: {
+      lang_s?: string;
+      lang_t?: string;
+      order?: string;
+      limit?: number;
+      offset?: number;
+    },
+  ): Promise<ListResponse> {
+    return await this.request("", apiName, "get", options);
   }
 
   /**

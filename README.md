@@ -54,19 +54,19 @@ This is not a TODO list, just an indication of the current state of support.
 This project is not intended to support all APIs.
 
 - [x] mt/lang_id
-- [ ] mt_standard/get
+- [x] mt_standard/get
 - [ ] mt_adapt/set
 - [ ] mt_adapt/update
-- [ ] mt_adapt/get
+- [x] mt_adapt/get
 - [ ] mt_adapt/delete
 - [ ] mt_custom/set
 - [ ] mt_custom/update
-- [ ] mt_custom/get
+- [x] mt_custom/get
 - [ ] mt_custom/delete
-- [ ] mt_share/get
+- [x] mt_share/get
 - [ ] term_root/set
 - [ ] term_root/update
-- [ ] term_root/get
+- [x] term_root/get
 - [ ] term_root/delete
 - [ ] term/set
 - [ ] term/set_file
@@ -75,7 +75,7 @@ This project is not intended to support all APIs.
 - [ ] term/delete
 - [ ] bilingual_root/set
 - [ ] bilingual_root/update
-- [ ] bilingual_root/get
+- [x] bilingual_root/get
 - [ ] bilingual_root/delete
 - [ ] bilingual/set
 - [ ] bilingual/set_file
@@ -84,7 +84,7 @@ This project is not intended to support all APIs.
 - [ ] bilingual/delete
 - [ ] regex_root/set
 - [ ] regex_root/update
-- [ ] regex_root/get
+- [x] regex_root/get
 - [ ] regex_root/delete
 - [ ] regex/set
 - [ ] regex/set_file

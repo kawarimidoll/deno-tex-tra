@@ -97,6 +97,13 @@ export type LangDetectResponse = {
   result?: { langdetect: { [k: string]: { lang: string; rate: number } } };
 };
 
+export type SplitResponse = {
+  code: number;
+  message: string;
+  request?: { url: string; text: string; lang: string; join?: number };
+  result?: { text: string[] };
+};
+
 const BASE_URL = "https://mt-auto-minhon-mlt.ucri.jgn-x.jp";
 const AUTH_URL = `${BASE_URL}/oauth2/token.php`;
 const API_URL = `${BASE_URL}/api/`;
@@ -216,6 +223,21 @@ export class TexTra {
    */
   async langDetect(text: string): Promise<LangDetectResponse> {
     return await this.request(text, "langdetect");
+  }
+
+  /**
+   * Split text
+   * @param text - Text to split
+   * @param lang - Language to split
+   * @param join - Join split text
+   * @returns Split API result
+   */
+  async split(
+    text: string,
+    lang: string,
+    join: 0 | 1 = 0,
+  ): Promise<SplitResponse> {
+    return await this.request(text, "split", "", { lang, join });
   }
 
   private async auth() {

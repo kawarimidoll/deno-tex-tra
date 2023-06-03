@@ -94,7 +94,7 @@ This project is not intended to support all APIs.
 - [ ] lookup
 - [ ] sim
 - [ ] simCalc
-- [ ] split
+- [x] split
 - [x] langdetect
 - [ ] trans_file/set
 - [ ] trans_file/status

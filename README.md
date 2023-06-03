@@ -71,7 +71,7 @@ This project is not intended to support all APIs.
 - [ ] term/set
 - [ ] term/set_file
 - [ ] term/update
-- [ ] term/get
+- [ ] term/search
 - [ ] term/delete
 - [ ] bilingual_root/set
 - [ ] bilingual_root/update
@@ -80,7 +80,7 @@ This project is not intended to support all APIs.
 - [ ] bilingual/set
 - [ ] bilingual/set_file
 - [ ] bilingual/update
-- [ ] bilingual/get
+- [ ] bilingual/search
 - [ ] bilingual/delete
 - [ ] regex_root/set
 - [ ] regex_root/update
@@ -89,7 +89,7 @@ This project is not intended to support all APIs.
 - [ ] regex/set
 - [ ] regex/set_file
 - [ ] regex/update
-- [ ] regex/get
+- [ ] regex/search
 - [ ] regex/delete
 - [ ] lookup
 - [ ] sim

@@ -174,7 +174,7 @@ export class TexTra {
    * @param text - Text to detect language
    * @returns Language detection API result
    */
-  async langDetect(text: string) {
+  async langDetect(text: string): Promise<LangDetectResponse> {
     return await this.request(text, "langdetect");
   }
 

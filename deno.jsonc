@@ -1,10 +1,10 @@
 {
   "name": "@kawarimidoll/tex-tra",
   "version": "0.0.0",
-  "exports": "./tex_tra.ts",
+  "exports": "./mod.ts",
   "publish": {
     "include": [
-      "tex_tra.ts",
+      "mod.ts",
       "deno.jsonc",
       "LICENSE",
       "README.md",

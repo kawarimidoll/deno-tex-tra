@@ -113,7 +113,7 @@ const API_URL = `${BASE_URL}/api/`;
  *
  * @example
  * ```ts
- *  import { TexTra } from "https://deno.land/x/tex_tra/tex_tra.ts";
+ *  import { TexTra } from "@kawarimidoll/tex-tra";
  *  const name = "your_name";
  *  const key = "your_key";
  *  const secret = "your_secret";
@@ -140,7 +140,7 @@ export class TexTra {
    * @param secret - API secret
    * @example
    * ```ts
-   *  import { TexTra } from "https://deno.land/x/tex_tra/tex_tra.ts";
+   *  import { TexTra } from "@kawarimidoll/tex-tra";
    *  const name = "your_name";
    *  const key = "your_key";
    *  const secret = "your_secret";
@@ -169,7 +169,7 @@ export class TexTra {
    * @returns Translation API result
    * @example
    * ```ts
-   *  import { TexTra } from "https://deno.land/x/tex_tra/tex_tra.ts";
+   *  import { TexTra } from "@kawarimidoll/tex-tra";
    *  const name = "your_name";
    *  const key = "your_key";
    *  const secret = "your_secret";

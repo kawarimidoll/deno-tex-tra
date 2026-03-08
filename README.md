@@ -7,7 +7,7 @@ https://mt-auto-minhon-mlt.ucri.jgn-x.jp/content/api/
 ## Usage
 
 ```ts
-import { TexTra } from "https://deno.land/x/tex_tra/tex_tra.ts";
+import { TexTra } from "@kawarimidoll/tex-tra";
 
 const name = "your_name";
 const key = "your_key";

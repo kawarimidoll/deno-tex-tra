@@ -186,12 +186,12 @@ export class TexTra {
    *  }
    * ```
    */
-  async translate(
+  translate(
     text: string,
     apiName: string,
     apiParam: string,
   ): Promise<TranslateResponse> {
-    return await this.request(text, apiName, apiParam);
+    return this.request(text, apiName, apiParam);
   }
 
   /**
@@ -200,7 +200,7 @@ export class TexTra {
    * @param options - API options
    * @returns List acquisition API result
    */
-  async listAcquisition(
+  listAcquisition(
     apiName:
       | "mt_standard"
       | "mt_adapt"
@@ -217,7 +217,7 @@ export class TexTra {
       offset?: number;
     },
   ): Promise<ListResponse> {
-    return await this.request("", apiName, "get", options);
+    return this.request("", apiName, "get", options);
   }
 
   /**
@@ -225,8 +225,8 @@ export class TexTra {
    * @param text - Text to detect language
    * @returns Language detection API result
    */
-  async langDetect(text: string): Promise<LangDetectResponse> {
-    return await this.request(text, "langdetect");
+  langDetect(text: string): Promise<LangDetectResponse> {
+    return this.request(text, "langdetect");
   }
 
   /**
@@ -236,12 +236,12 @@ export class TexTra {
    * @param join - Join split text
    * @returns Split API result
    */
-  async split(
+  split(
     text: string,
     lang: string,
     join: 0 | 1 = 0,
   ): Promise<SplitResponse> {
-    return await this.request(text, "split", "", { lang, join });
+    return this.request(text, "split", "", { lang, join });
   }
 
   private async auth(): Promise<void> {
@@ -252,18 +252,20 @@ export class TexTra {
     body.append("urlAccessToken", AUTH_URL);
 
     const response = await fetch(AUTH_URL, { method: "POST", body });
+    if (!response.ok) {
+      throw new Error(`Auth failed: ${response.status} ${response.statusText}`);
+    }
     const { access_token, expires_in } = await response.json();
     this.token = access_token;
     this.expire = Date.now() + expires_in;
   }
 
-  private async request(
+  private async request<T>(
     text: string,
     apiName: string,
     apiParam?: string,
     options: Record<string, string | number> = {},
-    // deno-lint-ignore no-explicit-any
-  ): Promise<any> {
+  ): Promise<T> {
     if (!this.token || this.expire < Date.now()) {
       await this.auth();
     }
@@ -282,6 +284,11 @@ export class TexTra {
     }
 
     const response = await fetch(API_URL, { method: "POST", body });
-    return (await response.json()).resultset;
+    if (!response.ok) {
+      throw new Error(
+        `API request failed: ${response.status} ${response.statusText}`,
+      );
+    }
+    return (await response.json()).resultset as T;
   }
 }

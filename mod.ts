@@ -1,3 +1,4 @@
+/** Response type for the translate API. */
 export type TranslateResponse = {
   code: number;
   message: string;
@@ -76,6 +77,7 @@ export type TranslateResponse = {
   };
 };
 
+/** Response type for the list acquisition API. */
 export type ListResponse = {
   code: number;
   message: string;
@@ -90,6 +92,7 @@ export type ListResponse = {
   };
 };
 
+/** Response type for the language detection API. */
 export type LangDetectResponse = {
   code: number;
   message: string;
@@ -97,6 +100,7 @@ export type LangDetectResponse = {
   result?: { langdetect: { [k: string]: { lang: string; rate: number } } };
 };
 
+/** Response type for the text split API. */
 export type SplitResponse = {
   code: number;
   message: string;
@@ -240,7 +244,7 @@ export class TexTra {
     return await this.request(text, "split", "", { lang, join });
   }
 
-  private async auth() {
+  private async auth(): Promise<void> {
     const body = new FormData();
     body.append("grant_type", "client_credentials");
     body.append("client_id", this.key);
@@ -258,7 +262,8 @@ export class TexTra {
     apiName: string,
     apiParam?: string,
     options: Record<string, string | number> = {},
-  ) {
+    // deno-lint-ignore no-explicit-any
+  ): Promise<any> {
     if (!this.token || this.expire < Date.now()) {
       await this.auth();
     }

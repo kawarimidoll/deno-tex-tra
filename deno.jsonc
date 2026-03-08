@@ -1,5 +1,17 @@
 {
+  "name": "@kawarimidoll/tex-tra",
+  "version": "0.0.0",
+  "exports": "./tex_tra.ts",
+  "publish": {
+    "include": [
+      "tex_tra.ts",
+      "deno.jsonc",
+      "LICENSE",
+      "README.md",
+      "API_COVERAGE.md"
+    ]
+  },
   "tasks": {
-    "ci": "deno lint && deno fmt"
+    "ci": "deno lint && deno fmt --check && deno publish --dry-run --allow-dirty"
   }
 }
